@@ -1,0 +1,5 @@
+- En las implementaciones 1 y 2, ¿las operaciones Send()/Isend() y Recv()/Irecv() pueden ejecutarse en cualquier orden?
+
+En el caso de las funciones bloqueantes sí importa, por tanto siempre hay qu eponer el Send antes que el Recv.
+En el caso de las funciones no bloqueantes no importa. Lo que afecta en este caso es el lugar en el que poner los Wait, que hara el efecto bloqueante. Tendremos que poner ambos después de las dos llamadas para que no afecte el orden.
+Si queremos imprimir algo que recibimos tenemos que poner el Wait de Irecv antes de imprimir, si no podría no haber llegado nada. Implementaremos el Wait de Isend al final para aprovecharse de la ventaja que nos dan estas funciones, enviamos y seguimos con el código, y luego nos aseguramos antes de finalizar el programa que se ha hecho el envío.
